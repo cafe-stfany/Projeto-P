@@ -24,7 +24,7 @@ public class ProdutoDao {
              PreparedStatement ps = con.prepareStatement(sql)) {
 
             ps.setFloat(1, produto.getValorProduto());
-            ps.setString(2, produto.getIdCategoria());
+            ps.setInt(2, produto.getIdCategoria());
             ps.setString(3, produto.getDescricao());
 
             ps.executeUpdate();
@@ -43,7 +43,7 @@ public class ProdutoDao {
              PreparedStatement ps = con.prepareStatement(sql)) {
 
             ps.setFloat(1, produto.getValorProduto());
-            ps.setString(2, produto.getIdCategoria());
+            ps.setInt(2, produto.getIdCategoria());
             ps.setString(3, produto.getDescricao());
             ps.setInt(4, produto.getIdProduto());
 
@@ -84,7 +84,7 @@ public class ProdutoDao {
                 Produto produto = new Produto();
                 produto.setIdProduto(rs.getInt("idProduto"));
                 produto.setValorProduto(rs.getFloat("valorProduto"));
-                produto.setIdCategoria(rs.getString("idCategoria"));
+                produto.setIdCategoria(rs.getInt("idCategoria"));
                 produto.setDescricao(rs.getString("descricao"));
 
                 produtos.add(produto);

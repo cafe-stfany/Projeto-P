@@ -3,7 +3,7 @@ package br.ufmt.alg3;
 public class Produto {
     private int idProduto;
     private Float valorProduto;
-    private String idCategoria;
+    private int idCategoria;
     private String descricao;
 
 
@@ -19,10 +19,10 @@ public class Produto {
     public void setValorProduto(Float valorProduto) {
         this.valorProduto= valorProduto;
     }
-    public String getIdCategoria() {
+    public int getIdCategoria() {
         return idCategoria;
     }
-    public void setIdCategoria(String idCategoria) {
+    public void setIdCategoria(int idCategoria) {
         this.idCategoria = idCategoria;
     }
     public String getDescricao() {
