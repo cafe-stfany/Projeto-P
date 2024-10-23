@@ -1,7 +1,6 @@
-package br.ufmt.alg3;
+package br.ufmt.alg3.repository;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,15 +8,12 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.ufmt.alg3.io.Venda;
+
+import static br.ufmt.alg3.utils.abreconexao.abreConexao;
+
 public class VendaDao {
 
-    private Connection abreConexao() throws SQLException {
-        return DriverManager.getConnection(
-            "jdbc:postgresql://127.0.0.1:5433/sua_loja", 
-            "usuario", 
-            "senha"
-        );
-    }
 
     
     public void inserir(Venda venda) {

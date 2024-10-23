@@ -1,4 +1,4 @@
-package br.ufmt.alg3;
+package br.ufmt.alg3.io;
 
 public class Cliente {
     private int idCliente;

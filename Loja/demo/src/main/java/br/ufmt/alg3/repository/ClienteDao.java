@@ -1,22 +1,18 @@
-package br.ufmt.alg3;
+package br.ufmt.alg3.repository;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClienteDao {
-     private Connection abreConexao() throws SQLException {
-        return DriverManager.getConnection(
-            "jdbc:postgresql://127.0.0.1:5433/sua_loja",
-            "usuario",
-            "senha"
-        );
-    }
+import br.ufmt.alg3.io.Cliente;
 
+import static br.ufmt.alg3.utils.abreconexao.abreConexao;
+
+public class ClienteDao {
+     
     public void inserir(Cliente cliente) {
         String sql = "INSERT INTO cliente (cpf, nome, telefone) VALUES (?, ?, ?);";
         try (Connection con = abreConexao(); 
@@ -26,7 +22,12 @@ public class ClienteDao {
             ps.setString(2, cliente.getNome());
             ps.setString(3, cliente.getTelefone());
             ps.executeUpdate();
+           try {
+
             
+           } catch (Exception e) {
+           
+           }
         } catch (SQLException erro) {
             System.out.println("Não foi possível inserir o cliente!");
             erro.printStackTrace();
@@ -85,4 +86,7 @@ public class ClienteDao {
         }
         return clientes;
     }
+
+    public buscar(String cpf){
+        String sql = "SELECT * FROM cliente WHERE cpf = ?";
 }

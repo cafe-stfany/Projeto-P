@@ -1,22 +1,19 @@
-package br.ufmt.alg3;
+package br.ufmt.alg3.repository;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.ufmt.alg3.io.ItemVenda;
+
+import static br.ufmt.alg3.utils.abreconexao.abreConexao;
+
 public class ItemVendaDao {
 
-    private Connection abreConexao() throws SQLException {
-        return DriverManager.getConnection(
-            "jdbc:postgresql://127.0.0.1:5433/sua_loja", // Atualize com seus dados
-            "usuario", 
-            "senha"
-        );
-    }
+
 
    
     public void inserir(ItemVenda item) {
