@@ -1,5 +1,8 @@
 package br.ufmt.alg3;
 
+import java.util.List;
+
+import br.ufmt.alg3.io.Categoria;
 import br.ufmt.alg3.io.Cliente;
 import br.ufmt.alg3.repository.ClienteDao;
 
@@ -24,6 +27,12 @@ public final class App {
         clienteDAO.inserir(cliente);
 
         clienteDAO.remover(cliente.getIdCliente());
+
+
+        List<Categoria> categorias= dao.listar();
+        categorias.forEach(c -> {
+
+        });
 
         
 

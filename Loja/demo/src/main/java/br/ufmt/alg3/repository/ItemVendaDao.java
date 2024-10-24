@@ -6,9 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import br.ufmt.alg3.io.ItemVenda;
-
 import static br.ufmt.alg3.utils.abreconexao.abreConexao;
 
 public class ItemVendaDao {
