@@ -87,6 +87,32 @@ public class ClienteDao {
         return clientes;
     }
 
-    public buscar(String cpf){
+    public Cliente buscar(String cpf){
+
         String sql = "SELECT * FROM cliente WHERE cpf = ?";
-}
+        Cliente cliente = new Cliente();
+        try  (Connection con = abreConexao(); 
+            PreparedStatement ps = con.prepareStatement(sql); 
+            ResultSet rs = ps.executeQuery();){
+
+                cliente.setIdCliente(rs.getInt("idCliente"));
+                cliente.setCpf(rs.getString("cpf"));
+                cliente.setNome(rs.getString("nome"));
+                cliente.setTelefone(rs.getString("telefone"));
+              
+              
+
+            }
+             catch (SQLException erro) {
+                System.out.println("Cliente não cadastrado!");
+                erro.printStackTrace();
+            }
+            return cliente;  
+            }
+        };
+            
+        
+    
+
+
+
