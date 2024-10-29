@@ -3,29 +3,34 @@ package br.ufmt.alg3.io;
 import java.util.Date;
 
 public class Venda {
-    private int idVenda;
-    private int idCliente;
-    private float valorTotal;
-    private Date dataVenda;
+    public int id;
+    public Cliente cliente;  
+    public float valorTotal;
+    public Date dataVenda;
+    public String status;
+    public String formaPagamento;
 
-    // Getters e Setters
-    public int getIdVenda() {
-        return idVenda;
-    }
-    public void setIdVenda(int idVenda) {
-        this.idVenda = idVenda;
+    
+    public int getId() {
+        return id;
     }
 
-    public int getIdCliente() {
-        return idCliente;
+    public void setId(int id) {
+        this.id = id;
     }
-    public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     public float getValorTotal() {
         return valorTotal;
     }
+
     public void setValorTotal(float valorTotal) {
         this.valorTotal = valorTotal;
     }
@@ -33,7 +38,24 @@ public class Venda {
     public Date getDataVenda() {
         return dataVenda;
     }
+
     public void setDataVenda(Date dataVenda) {
         this.dataVenda = dataVenda;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getFormaPagamento() {
+        return formaPagamento;
+    }
+
+    public void setFormaPagamento(String formaPagamento) {
+        this.formaPagamento = formaPagamento;
     }
 }

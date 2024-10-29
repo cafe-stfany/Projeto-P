@@ -29,10 +29,6 @@ public final class App {
         clienteDAO.remover(cliente.getIdCliente());
 
 
-        List<Categoria> categorias= dao.listar();
-        categorias.forEach(c -> {
-
-        });
 
         
 

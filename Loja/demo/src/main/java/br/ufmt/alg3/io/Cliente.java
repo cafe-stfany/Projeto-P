@@ -1,10 +1,10 @@
 package br.ufmt.alg3.io;
 
 public class Cliente {
-    private int idCliente;
-    private String cpf;
-    private String nome;
-    private String telefone;
+    public int idCliente;
+    public String cpf;
+    public String nome;
+    public String telefone;
 
     // Getters e Setters
     public int getIdCliente() {
