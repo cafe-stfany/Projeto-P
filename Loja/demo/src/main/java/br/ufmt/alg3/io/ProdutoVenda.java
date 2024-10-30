@@ -1,12 +1,20 @@
 package br.ufmt.alg3.io;
 
 public class ProdutoVenda {
+    public int id;
     public Produto produto;  // Associação com Produto
     public Venda venda;      // Associação com Venda
     public int quantidade;
     public float precoUnitario;
 
     // Getters e Setters
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
     public Produto getProduto() {
         return produto;
     }
