@@ -13,15 +13,17 @@ import br.ufmt.alg3.io.Cliente;
 
 public class ClienteDao {
 
-    // Inserir um novo cliente
+    
     public void inserir(Cliente cliente) {
-        String sql = "INSERT INTO cliente (cpf, nome, telefone) VALUES (?, ?, ?);";
+        String sql = "INSERT INTO cliente (nome, cpf,  telefone, email, endereco) VALUES (?, ?, ?, ?, ?);";
         try (Connection con = abreConexao();
              PreparedStatement ps = con.prepareStatement(sql)) {
 
-            ps.setString(1, cliente.getCpf());
-            ps.setString(2, cliente.getNome());
+            ps.setString(1, cliente.getNome());
+            ps.setString(2, cliente.getCpf());
             ps.setString(3, cliente.getTelefone());
+            ps.setString(4, cliente.getEmail());
+            ps.setString(5, cliente.getEndereco());
             ps.executeUpdate();
             System.out.println("Cliente inserido com sucesso!");
 
@@ -31,16 +33,18 @@ public class ClienteDao {
         }
     }
 
-    // Atualizar um cliente existente
+   
     public void atualizar(Cliente cliente) {
-        String sql = "UPDATE cliente SET cpf = ?, nome = ?, telefone = ? WHERE idCliente = ?;";
+        String sql = "UPDATE cliente SET nome = ?, cpf = ?, telefone = ?, email = ?, endereco = ? WHERE idCliente = ?;";
         try (Connection con = abreConexao();
              PreparedStatement ps = con.prepareStatement(sql)) {
 
-            ps.setString(1, cliente.getCpf());
-            ps.setString(2, cliente.getNome());
+            ps.setString(1, cliente.getNome());
+            ps.setString(2, cliente.getCpf());
             ps.setString(3, cliente.getTelefone());
-            ps.setInt(4, cliente.getIdCliente());
+            ps.setString(4, cliente.getEmail());
+            ps.setString(5, cliente.getEndereco());
+            ps.setInt(6, cliente.getIdCliente());
             ps.executeUpdate();
             System.out.println("Cliente atualizado com sucesso!");
 
@@ -50,7 +54,7 @@ public class ClienteDao {
         }
     }
 
-    // Remover um cliente pelo ID
+   
     public void remover(int idCliente) {
         String sql = "DELETE FROM cliente WHERE idCliente = ?;";
         try (Connection con = abreConexao();
@@ -66,7 +70,6 @@ public class ClienteDao {
         }
     }
 
-    // Listar todos os clientes
     public List<Cliente> listar() {
         List<Cliente> clientes = new ArrayList<>();
         String sql = "SELECT * FROM cliente;";
@@ -77,9 +80,11 @@ public class ClienteDao {
             while (rs.next()) {
                 Cliente cliente = new Cliente();
                 cliente.setIdCliente(rs.getInt("idCliente"));
-                cliente.setCpf(rs.getString("cpf"));
                 cliente.setNome(rs.getString("nome"));
+                cliente.setCpf(rs.getString("cpf"));
                 cliente.setTelefone(rs.getString("telefone"));
+                cliente.setEmail(rs.getString("email"));  
+                cliente.setEndereco(rs.getString("endereco"));  
                 clientes.add(cliente);
             }
 
@@ -90,7 +95,7 @@ public class ClienteDao {
         return clientes;
     }
 
-    // Buscar um cliente pelo CPF
+    
     public Cliente buscar(String cpf) {
         String sql = "SELECT * FROM cliente WHERE cpf = ?;";
         Cliente cliente = null;
@@ -103,9 +108,11 @@ public class ClienteDao {
                 if (rs.next()) {
                     cliente = new Cliente();
                     cliente.setIdCliente(rs.getInt("idCliente"));
-                    cliente.setCpf(rs.getString("cpf"));
                     cliente.setNome(rs.getString("nome"));
+                    cliente.setCpf(rs.getString("cpf"));
                     cliente.setTelefone(rs.getString("telefone"));
+                    cliente.setEmail(rs.getString("email"));  
+                    cliente.setEndereco(rs.getString("endereco")); 
                 } else {
                     System.out.println("Cliente não encontrado!");
                 }
@@ -119,9 +126,6 @@ public class ClienteDao {
         return cliente;
     }
 }
-
-        
-    
 
 
 

@@ -1,5 +1,7 @@
 package br.ufmt.alg3.repository;
 
+import static br.ufmt.alg3.utils.abreconexao.abreConexao;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,8 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.ufmt.alg3.io.Produto;
-import br.ufmt.alg3.io.Categoria;
-import static br.ufmt.alg3.utils.abreconexao.abreConexao;
+
 
 public class ProdutoDao {
 
@@ -23,7 +24,7 @@ public class ProdutoDao {
             ps.setString(2, produto.getDescricao());
             ps.setFloat(3, produto.getPreco());
             ps.setInt(4, produto.getEstoque());
-            ps.setInt(5, produto.getCategoria().getId());
+            ps.setInt(5, produto.getIdCategoria());
 
             ps.executeUpdate();
             System.out.println("Produto inserido com sucesso!");
@@ -36,7 +37,7 @@ public class ProdutoDao {
 
     // Atualizar produto existente
     public void atualizar(Produto produto) {
-        String sql = "UPDATE produto SET nome = ?, descricao = ?, preco = ?, estoque = ?, idCategoria = ? WHERE idProduto = ?;";
+        String sql = "UPDATE produto SET nome = ?, descricao = ?, preco = ?, estoque = ?, idCategoria = ? WHERE id = ?;";
         try (Connection con = abreConexao();
              PreparedStatement ps = con.prepareStatement(sql)) {
 
@@ -44,7 +45,7 @@ public class ProdutoDao {
             ps.setString(2, produto.getDescricao());
             ps.setFloat(3, produto.getPreco());
             ps.setInt(4, produto.getEstoque());
-            ps.setInt(5, produto.getCategoria().getId());
+            ps.setInt(5, produto.getIdCategoria());
             ps.setInt(6, produto.getId());
 
             ps.executeUpdate();
@@ -58,7 +59,7 @@ public class ProdutoDao {
 
     // Remover produto pelo ID
     public void remover(int idProduto) {
-        String sql = "DELETE FROM produto WHERE idProduto = ?;";
+        String sql = "DELETE FROM produto WHERE id = ?;";
         try (Connection con = abreConexao();
              PreparedStatement ps = con.prepareStatement(sql)) {
 
@@ -72,27 +73,22 @@ public class ProdutoDao {
         }
     }
 
-    // Listar todos os produtos
+   
     public List<Produto> listar() {
         List<Produto> produtos = new ArrayList<>();
-        String sql = "SELECT p.*, c.idCategoria, c.nome AS nomeCategoria FROM produto p JOIN categoria c ON p.idCategoria = c.idCategoria;";
+        String sql = "SELECT * FROM produto;";
         try (Connection con = abreConexao();
              PreparedStatement ps = con.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
                 Produto produto = new Produto();
-                produto.setId(rs.getInt("idProduto"));
+                produto.setId(rs.getInt("id"));  
                 produto.setNome(rs.getString("nome"));
                 produto.setDescricao(rs.getString("descricao"));
                 produto.setPreco(rs.getFloat("preco"));
                 produto.setEstoque(rs.getInt("estoque"));
-
-                // Configurando a categoria do produto
-                Categoria categoria = new Categoria();
-                categoria.setId(rs.getInt("idCategoria"));
-                categoria.setNome(rs.getString("nomeCategoria"));
-                produto.setCategoria(categoria);
+                produto.setIdCategoria(rs.getInt("idCategoria")); 
 
                 produtos.add(produto);
             }
@@ -104,9 +100,9 @@ public class ProdutoDao {
         return produtos;
     }
 
-    // Buscar produto pelo ID
+    
     public Produto buscar(int idProduto) {
-        String sql = "SELECT p.*, c.idCategoria, c.nome AS nomeCategoria FROM produto p JOIN categoria c ON p.idCategoria = c.idCategoria WHERE p.idProduto = ?;";
+        String sql = "SELECT * FROM produto WHERE id = ?;";
         Produto produto = null;
 
         try (Connection con = abreConexao();
@@ -117,17 +113,12 @@ public class ProdutoDao {
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     produto = new Produto();
-                    produto.setId(rs.getInt("idProduto"));
+                    produto.setId(rs.getInt("id"));  
                     produto.setNome(rs.getString("nome"));
                     produto.setDescricao(rs.getString("descricao"));
                     produto.setPreco(rs.getFloat("preco"));
                     produto.setEstoque(rs.getInt("estoque"));
-
-                    // Configurando a categoria do produto
-                    Categoria categoria = new Categoria();
-                    categoria.setId(rs.getInt("idCategoria"));
-                    categoria.setNome(rs.getString("nomeCategoria"));
-                    produto.setCategoria(categoria);
+                    produto.setIdCategoria(rs.getInt("idCategoria")); 
                 } else {
                     System.out.println("Produto não encontrado!");
                 }
@@ -141,5 +132,3 @@ public class ProdutoDao {
         return produto;
     }
 }
-
-

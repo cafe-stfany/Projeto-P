@@ -2,11 +2,12 @@ package br.ufmt.alg3.io;
 
 public class Cliente {
     public int idCliente;
-    public String cpf;
     public String nome;
+    public String cpf;
     public String telefone;
+    public String email;
+    public String endereco;
 
-    // Getters e Setters
     public int getIdCliente() {
         return idCliente;
     }
@@ -33,6 +34,18 @@ public class Cliente {
     }
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    public String getEndereco() {
+        return endereco;
+    }
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
     }
 
 }

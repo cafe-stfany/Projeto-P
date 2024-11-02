@@ -13,7 +13,7 @@ import static br.ufmt.alg3.utils.abreconexao.abreConexao;
 
 public class CategoriaDao {
 
-    // Método para inserir uma nova categoria
+    
     public void inserir(Categoria categoria) {
         String sql = "INSERT INTO categoria (nome, descricao) VALUES (?, ?);";
         try (Connection con = abreConexao();
@@ -30,7 +30,7 @@ public class CategoriaDao {
         }
     }
 
-    // Método para atualizar uma categoria existente
+  
     public void atualizar(Categoria categoria) {
         String sql = "UPDATE categoria SET nome = ?, descricao = ? WHERE id = ?;";
         try (Connection con = abreConexao();
@@ -48,7 +48,7 @@ public class CategoriaDao {
         }
     }
 
-    // Método para remover uma categoria pelo ID
+ 
     public void remover(int id) {
         String sql = "DELETE FROM categoria WHERE id = ?;";
         try (Connection con = abreConexao();
@@ -64,7 +64,7 @@ public class CategoriaDao {
         }
     }
 
-    // Método para listar todas as categorias
+   
     public List<Categoria> listar() {
         List<Categoria> categorias = new ArrayList<>();
         String sql = "SELECT * FROM categoria;";

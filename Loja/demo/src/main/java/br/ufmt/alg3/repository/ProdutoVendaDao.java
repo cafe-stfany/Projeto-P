@@ -1,136 +1,130 @@
 package br.ufmt.alg3.repository;
 
+import static br.ufmt.alg3.utils.abreconexao.abreConexao;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
 import br.ufmt.alg3.io.ProdutoVenda;
-import br.ufmt.alg3.io.Produto;
-import br.ufmt.alg3.io.Venda;
-import static br.ufmt.alg3.utils.abreconexao.abreConexao;
 
 public class ProdutoVendaDao {
 
-    // Inserir ProdutoVenda
-    public void inserir(ProdutoVenda item) {
-        String sql = "INSERT INTO produto_venda (idVenda, idProduto, quantidade, precoUnitario) VALUES (?, ?, ?, ?);";
-        try (Connection con = abreConexao(); 
+    
+    public void inserir(ProdutoVenda produtoVenda) {
+        String sql = "INSERT INTO produtovenda (idProduto, idVenda, quantidade, precoUnitario) VALUES (?, ?, ?, ?);";
+        try (Connection con = abreConexao();
              PreparedStatement ps = con.prepareStatement(sql)) {
 
-            ps.setInt(1, item.getVenda().getId());
-            ps.setInt(2, item.getProduto().getId());
-            ps.setInt(3, item.getQuantidade());
-            ps.setFloat(4, item.getPrecoUnitario());
+            ps.setInt(1, produtoVenda.getIdProduto());
+            ps.setInt(2, produtoVenda.getIdVenda());
+            ps.setInt(3, produtoVenda.getQuantidade());
+            ps.setFloat(4, produtoVenda.getPrecoUnitario());
+
             ps.executeUpdate();
             System.out.println("ProdutoVenda inserido com sucesso!");
 
         } catch (SQLException erro) {
-            System.out.println("Erro ao inserir ProdutoVenda!");
+            System.out.println("Erro ao inserir ProdutoVenda.");
             erro.printStackTrace();
         }
     }
 
-    // Atualizar ProdutoVenda
-    public void atualizar(ProdutoVenda item) {
-        String sql = "UPDATE produto_venda SET idVenda = ?, idProduto = ?, quantidade = ?, precoUnitario = ? WHERE id = ?;";
-        try (Connection con = abreConexao(); 
+    
+    public void atualizar(ProdutoVenda produtoVenda) {
+        String sql = "UPDATE produtovenda SET idProduto = ?, idVenda = ?, quantidade = ?, precoUnitario = ? WHERE id = ?;";
+        try (Connection con = abreConexao();
              PreparedStatement ps = con.prepareStatement(sql)) {
 
-            ps.setInt(1, item.getVenda().getId());
-            ps.setInt(2, item.getProduto().getId());
-            ps.setInt(3, item.getQuantidade());
-            ps.setFloat(4, item.getPrecoUnitario());
-            ps.setInt(5, item.getId());
+            ps.setInt(1, produtoVenda.getIdProduto());
+            ps.setInt(2, produtoVenda.getIdVenda());
+            ps.setInt(3, produtoVenda.getQuantidade());
+            ps.setFloat(4, produtoVenda.getPrecoUnitario());
+            ps.setInt(5, produtoVenda.getId());
+
             ps.executeUpdate();
             System.out.println("ProdutoVenda atualizado com sucesso!");
 
         } catch (SQLException erro) {
-            System.out.println("Erro ao atualizar ProdutoVenda!");
+            System.out.println("Erro ao atualizar ProdutoVenda.");
             erro.printStackTrace();
         }
     }
 
-    // Remover ProdutoVenda pelo ID
-    public void remover(int id) {
-        String sql = "DELETE FROM produto_venda WHERE id = ?;";
-        try (Connection con = abreConexao(); 
+    
+    public void remover(int idProdutoVenda) {
+        String sql = "DELETE FROM produtovenda WHERE id = ?;";
+        try (Connection con = abreConexao();
              PreparedStatement ps = con.prepareStatement(sql)) {
 
-            ps.setInt(1, id);
+            ps.setInt(1, idProdutoVenda);
             ps.executeUpdate();
             System.out.println("ProdutoVenda removido com sucesso!");
 
         } catch (SQLException erro) {
-            System.out.println("Erro ao remover ProdutoVenda!");
+            System.out.println("Erro ao remover ProdutoVenda.");
             erro.printStackTrace();
         }
     }
 
-    // Listar todos os ProdutoVenda
+    
     public List<ProdutoVenda> listar() {
-        List<ProdutoVenda> itens = new ArrayList<>();
-        String sql = "SELECT * FROM produto_venda;";
-        try (Connection con = abreConexao(); 
-             PreparedStatement ps = con.prepareStatement(sql); 
+        List<ProdutoVenda> produtosVenda = new ArrayList<>();
+        String sql = "SELECT * FROM produtovenda;";
+        try (Connection con = abreConexao();
+             PreparedStatement ps = con.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
-                ProdutoVenda item = new ProdutoVenda();
-                item.setId(rs.getInt("id"));
+                ProdutoVenda produtoVenda = new ProdutoVenda();
+                produtoVenda.setId(rs.getInt("id"));  
+                produtoVenda.setIdProduto(rs.getInt("idProduto"));
+                produtoVenda.setIdVenda(rs.getInt("idVenda"));
+                produtoVenda.setQuantidade(rs.getInt("quantidade"));
+                produtoVenda.setPrecoUnitario(rs.getFloat("precoUnitario"));
 
-                // Criando objetos Produto e Venda com base nos IDs
-                Produto produto = new Produto();
-                produto.setId(rs.getInt("idProduto"));
-                item.setProduto(produto);
-
-                Venda venda = new Venda();
-                venda.setId(rs.getInt("idVenda"));
-                item.setVenda(venda);
-
-                item.setQuantidade(rs.getInt("quantidade"));
-                item.setPrecoUnitario(rs.getFloat("precoUnitario"));
-                itens.add(item);
+                produtosVenda.add(produtoVenda);
             }
+
         } catch (SQLException erro) {
-            System.out.println("Erro ao listar ProdutoVenda!");
+            System.out.println("Erro ao listar ProdutosVenda.");
             erro.printStackTrace();
         }
-        return itens;
+        return produtosVenda;
     }
 
-    // Buscar ProdutoVenda pelo ID
-    public ProdutoVenda buscar(int id) {
-        String sql = "SELECT * FROM produto_venda WHERE id = ?;";
-        ProdutoVenda item = null;
+    
+    public ProdutoVenda buscar(int idProdutoVenda) {
+        String sql = "SELECT * FROM produtovenda WHERE id = ?;";
+        ProdutoVenda produtoVenda = null;
 
-        try (Connection con = abreConexao(); 
+        try (Connection con = abreConexao();
              PreparedStatement ps = con.prepareStatement(sql)) {
 
-            ps.setInt(1, id);
+            ps.setInt(1, idProdutoVenda);
+
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    item = new ProdutoVenda();
-                    item.setId(rs.getInt("id"));
-
-                    // Preenchendo Produto e Venda
-                    Produto produto = new Produto();
-                    produto.setId(rs.getInt("idProduto"));
-                    item.setProduto(produto);
-
-                    Venda venda = new Venda();
-                    venda.setId(rs.getInt("idVenda"));
-                    item.setVenda(venda);
-
-                    item.setQuantidade(rs.getInt("quantidade"));
-                    item.setPrecoUnitario(rs.getFloat("precoUnitario"));
+                    produtoVenda = new ProdutoVenda();
+                    produtoVenda.setId(rs.getInt("id"));  
+                    produtoVenda.setIdProduto(rs.getInt("idProduto"));
+                    produtoVenda.setIdVenda(rs.getInt("idVenda"));
+                    produtoVenda.setQuantidade(rs.getInt("quantidade"));
+                    produtoVenda.setPrecoUnitario(rs.getFloat("precoUnitario"));
+                } else {
+                    System.out.println("ProdutoVenda não encontrado!");
                 }
             }
+
         } catch (SQLException erro) {
-            System.out.println("Erro ao buscar ProdutoVenda!");
+            System.out.println("Erro ao buscar ProdutoVenda.");
             erro.printStackTrace();
         }
-        return item;
+
+        return produtoVenda;
     }
 }
+

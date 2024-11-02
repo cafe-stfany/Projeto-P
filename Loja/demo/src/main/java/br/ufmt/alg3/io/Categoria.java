@@ -5,7 +5,7 @@ public class Categoria {
     public String nome;
     public String descricao;
 
-    // Getters e Setters
+  
     public int getId() {
         return id;
     }
