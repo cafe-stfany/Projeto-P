@@ -1,0 +1,15 @@
+/home/aluno/Documentos/projeto P/Loja/demo/src/main/java/br/ufmt/alg3/App.java
+/home/aluno/Documentos/projeto P/Loja/demo/src/main/java/br/ufmt/alg3/CadastrarClienteJPanel.java
+/home/aluno/Documentos/projeto P/Loja/demo/src/main/java/br/ufmt/alg3/LoginJFrame.java
+/home/aluno/Documentos/projeto P/Loja/demo/src/main/java/br/ufmt/alg3/TelaPrincipalJFrame.java
+/home/aluno/Documentos/projeto P/Loja/demo/src/main/java/br/ufmt/alg3/io/Categoria.java
+/home/aluno/Documentos/projeto P/Loja/demo/src/main/java/br/ufmt/alg3/io/Cliente.java
+/home/aluno/Documentos/projeto P/Loja/demo/src/main/java/br/ufmt/alg3/io/Produto.java
+/home/aluno/Documentos/projeto P/Loja/demo/src/main/java/br/ufmt/alg3/io/ProdutoVenda.java
+/home/aluno/Documentos/projeto P/Loja/demo/src/main/java/br/ufmt/alg3/io/Venda.java
+/home/aluno/Documentos/projeto P/Loja/demo/src/main/java/br/ufmt/alg3/repository/CategoriaDao.java
+/home/aluno/Documentos/projeto P/Loja/demo/src/main/java/br/ufmt/alg3/repository/ClienteDao.java
+/home/aluno/Documentos/projeto P/Loja/demo/src/main/java/br/ufmt/alg3/repository/ProdutoDao.java
+/home/aluno/Documentos/projeto P/Loja/demo/src/main/java/br/ufmt/alg3/repository/ProdutoVendaDao.java
+/home/aluno/Documentos/projeto P/Loja/demo/src/main/java/br/ufmt/alg3/repository/VendaDao.java
+/home/aluno/Documentos/projeto P/Loja/demo/src/main/java/br/ufmt/alg3/utils/abreconexao.java
